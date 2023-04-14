@@ -19,7 +19,7 @@ public class Product {
 
     private boolean onSpecial;
 
-    public Product(int id, String image, String name, double price, int quantity) {
+    public Product(int id, String name, String image, double price, int quantity) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -34,7 +34,6 @@ public class Product {
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
-
     public String getImage() {return image;}
     public void setImage(String image) {this.image = image;}
 
@@ -44,15 +43,24 @@ public class Product {
     public int getQuantity() {return quantity;}
     public void setQuantity(int quantity) {this.quantity = quantity;}
 
+    public void incrementProductQuantity(){
+        this.quantity ++;
+    }
+
+    public void decrementProductQuantity(){
+        this.quantity --;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", Name='" + name + '\''+
-                ", photo='" + image + '\'' +
+                ", name='" + name + '\''+
+                ", image='" + image + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';
     }
+
 
 }

@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 @WebServlet(name = "downloadServlet", value = "/downloadServlet")
-public class downloadServlet extends HttpServlet {
+public class DownloadServlet extends HttpServlet {
     private static final int BYTES_DOWNLOAD = 1024; //common buffer size
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, IOException {

@@ -4,7 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.demo7.resource.resource" %>
-<%@ page import="com.example.demo7.service.cartService"%>
+<%@ page import="com.example.demo7.service.impl.CartServiceImpl"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -102,7 +102,7 @@
     <nav class="navbar">
         <a href="logOutServlet">Logout</a>
         <img src="images/logo.png" width=100px>
-         <a href="removeAccount.jsp">remove Account</a>
+         <a href="removeAccount.jsp">Remove Account</a>
             </nav>
     <h1>Shopping Cart</h1>
 </header>
@@ -112,7 +112,7 @@
     request.setAttribute("cart", cart);
     }else {
     cart = new Cart();
-    request.setAttribute("cart",cart);
+    request.setAttribute("cart", cart);
     }
 
 %>
@@ -120,7 +120,8 @@
     <h2>Your Cart:${email}</h2>
     <%
         if (!cart.getCartList().isEmpty()) {
-        for(Product c:cart.getCartList()){%>
+            for(Product c : cart.getCartList()){
+    %>
     <div class="cart-item">
         <img src="<%= c.getImage() %>" alt="<%= c.getName() %>">
         <div>
@@ -130,15 +131,14 @@
             </span><br>
             <span>Quantity:</span>
             <span><%=c.getQuantity()%></span>
-        </div>
 
+        <button><a href="QuantityIncreaseDecreaseServlet?action=increase&id=<%=c.getId()%>">+</a></button>
+        <button><a href="QuantityIncreaseDecreaseServlet?action=decrease&id=<%=c.getId()%>">-</a></button>
         <form action="removeFromCartServlet" method="get">
-                        <button type ="button">+</button>
-                         <button type ="button">-</button>
-
-                         <input type="hidden" name="id" value="<%= c.getId() %>">
-                      <button type="submit" name="action" value="Remove">Remove</button>
+            <input type="hidden" name="id" value="<%= c.getId() %>">
+            <button type="submit" name="action" value="Remove">Remove</button>
         </form>
+        </div>
     </div>
     <%
         }
@@ -167,3 +167,6 @@
 </form>
 </body>
 </html>
+
+
+

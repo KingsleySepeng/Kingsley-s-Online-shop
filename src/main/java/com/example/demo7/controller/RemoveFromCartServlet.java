@@ -2,17 +2,15 @@ package com.example.demo7.controller;
 
 import com.example.demo7.domain.Cart;
 
-import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 @WebServlet(name = "removeFromCartServlet", value = "/removeFromCartServlet")
-public class removeFromCartServlet extends HttpServlet {
+public class RemoveFromCartServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         try (PrintWriter out = response.getWriter()) {
             String id = request.getParameter("id");

@@ -2,8 +2,8 @@
 <%@ page import="com.example.demo7.resource.resource" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.demo7.domain.Customer" %>
-<%@ page import="com.example.demo7.service.productService" %>
-<%@ page import="com.example.demo7.resource.productResource" %>
+<%@ page import="com.example.demo7.service.impl.ProductServiceImpl" %>
+
 <%--  Created by IntelliJ IDEA.--%>
 <%--  User: kingsley--%>
 <%--  Date: 2023/02/13--%>
@@ -88,7 +88,7 @@
           color: white;
           padding: 5px;
           border-radius: 50%;
-          font-size: 14px;
+          font-size: 14px;}
     </style>
 </head>
 <body>
@@ -117,23 +117,24 @@
     <h2>Check out our latest products:${email}</h2>
     <%
 //      List<Product> products = (List<Product>) request.getSession().getAttribute("products");
-        productService pds = new productService();
+        ProductServiceImpl pds = new ProductServiceImpl();
         List<Product> products = pds.showProducts();
         if (products != null) {
-            for (Product pd : products) { %>
+            for (Product pd : products) {
+    %>
     <div class="product">
         <img src="<%=pd.getImage()%>" alt="image">
         <h3><%=pd.getName()%>
         </h3>
-        <p>R<%=pd.getPrice() %>
+        <p>R<%=pd.getPrice()%>
         </p><span>${added}</span>
-        <form action="addToCartServlet" method="GET">
+        <form action="addToCartServlet" method="POST">
             <input type="submit" class="Add-To-Cart" value="add to cart" id="<%=pd.getId()%>">
             <input type="hidden" name="id" value="<%=pd.getId()%>">
-            <input type="hidden" name="getImage" value="<%=pd.getImage()%>">
-            <input type="hidden" name="getName" value="<%=pd.getName()%>">
-            <input type="hidden" name="getPrice" value="<%=pd.getPrice()%>">
-             <input type="hidden" name="getQuantity" value="<%=pd.getQuantity()%>">
+            <input type="hidden" name="image" value="<%=pd.getImage()%>">
+            <input type="hidden" name="name" value="<%=pd.getName()%>">
+            <input type="hidden" name="price" value="<%=pd.getPrice()%>">
+            <input type="hidden" name="quantity" value="<%=pd.getQuantity()%>">
             <input type ="hidden" name ="email" value="<%=session.getAttribute("email")%>">
         </form>
     </div>

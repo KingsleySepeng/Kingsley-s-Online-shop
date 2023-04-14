@@ -1,17 +1,5 @@
 package com.example.demo7.resource;
 
-import com.example.demo7.domain.Cart;
-import com.example.demo7.domain.Customer;
-import com.example.demo7.domain.Product;
-import com.example.demo7.service.customerService;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import static java.lang.System.out;
-
 public class resource {
 
 //    public List<Customer> createCustomers(List<Customer> getCustomers) throws IOException {

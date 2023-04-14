@@ -1,4 +1,5 @@
-
+<%@ page import="com.example.demo7.domain.Cart" %>
+<%@ page import="com.example.demo7.domain.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -92,23 +93,42 @@
         }
     </style>
 <body>
+<header>
 <nav class="navbar">
     <a href="logOutServlet">Logout</a>
    <a href="mainPage.jsp"><img src="images/logo.png" width=100px></a>
     <a href="viewCart.jsp">Cart</a>
+    <h1>Checkout</h1>
 </nav>
-<h2>Thank you for purchasing from us...${email} here is your invoice of your order</h2>
+</header>
+
+
+<%
+    Cart cart = (Cart) session.getAttribute("cart");
+    if(cart != null) {
+        request.setAttribute("cart", cart);
+    }else {
+        cart = new Cart();
+        request.setAttribute("cart", cart);
+    }
+
+%>
 <div id="cart-section">
+    <h2>Thank you for purchasing from us...${email} here is your invoice of your order</h2>
     <h2>Your Order:${fullName}</h2>
+
+        <%
+            if (!cart.getCartList().isEmpty()) {
+                for(Product c : cart.getCartList()){
+        %>
     <div class="cart-item">
-        <img src="" alt="">
+    <img src="<%= c.getImage() %>" alt="<%= c.getName() %>">
         <div>
-            <h3>
-            </h3>
-            <span>Price: R
+            <h3><%= c.getName() %></h3>
+            <span>Price: R<%= c.getPrice() %>
             </span><br>
             <span>Quantity:</span>
-            <span></span>
+            <span><%=c.getQuantity()%></span>
         </div>
     </div>
     <%
@@ -122,16 +142,17 @@
         <div class="cart-total">
             <span>Total:</span>
 
-            <span>R ></span>
+            <span>R<%=String.format("%.2f", cart.getTotalPrice())%></span>
         </div>
         <div class="cart-quantity">
             <span>Quantity:</span>
-            <span></span>
+            <span><%=cart.getTotalQuantity()%></span>
         </div>
     </div>
 </div>
-<form action ="" method ="GET">
-<a href="orderSent.jsp" class="checkout">Submit order</a><br>
+<form action="OrderNowServlet" method ="post">
+    <input type="submit" id="submit_order" class="checkout" name="submit_order" value="Submit Order">
+<%--    <a href="orderSent.jsp" class="checkout">Submit order</a><br>--%>
 </form>
 </body>
 </html>

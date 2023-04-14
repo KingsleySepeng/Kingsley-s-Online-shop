@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Cart {
 
-    private List<Product> cartList = new ArrayList<Product>();
+    private List<Product> cartList = new ArrayList<>();
     private String cartEmail;
     private int totalQuantity;
     private double totalPrice;
@@ -65,7 +65,27 @@ public class Cart {
                 break;
             }
         }
+    }
 
+    public void incrementQuantity(int productId){
+        for(Product product : cartList){
+            if(product.getId() == productId){
+                this.totalQuantity ++;
+                this.totalPrice += product.getPrice();
+                product.incrementProductQuantity();
+            }
+        }
+
+    }
+
+    public void decrementQuantity(int productId){
+        for(Product product : cartList) {
+            if (product.getId() == productId) {
+                this.totalQuantity--;
+                this.totalPrice -= product.getPrice();
+                product.decrementProductQuantity();
+            }
+        }
     }
 }
 

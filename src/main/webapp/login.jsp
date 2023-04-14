@@ -129,7 +129,7 @@
                     passwordType = "text";
                 }%>
             <label class="form-label" for="showPassword">Password</label>
-            <input type="<%=passwordType%>" class="form-input <%= request.getAttribute("passEr") != null ? "has-error" : "" %>""  id="password" name="password"
+            <input type="<%=passwordType%>" class="form-input <%= request.getAttribute("passEr") != null ? "has-error" : "" %>" id="password" name="password"
                    required>
             <input type="checkbox" id="showPassword" name="showPassword" <%= (showPassword != null) ? "checked" : "" %>>
         </div>
